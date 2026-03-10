@@ -15,6 +15,11 @@ A hand-tracking 3D modeler that lets you create and manipulate wireframe models 
 
 ## Getting Started
 
+Download the MediaPipe model from their documentation page or by using the following link:
+<https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/latest/hand_landmarker.task>
+
+Once downloaded, place it in the `models` folder.
+
 ```bash
 npm install
 npm run dev
