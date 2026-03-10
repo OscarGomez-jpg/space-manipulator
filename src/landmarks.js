@@ -3,19 +3,6 @@
  *
  * Reference diagram:
  * https://ai.google.dev/edge/mediapipe/solutions/vision/hand_landmarker
- *
- *                  8   12  16  20
- *                  |   |   |   |
- *                  7   11  15  19
- *              4   |   |   |   |
- *              |   6   10  14  18
- *              3   |   |   |   |
- *              |   5---9--13--17
- *              2       |
- *               \      |
- *                1     |
- *                 \    |
- *                  0---+  (wrist)
  */
 
 export const LM = {

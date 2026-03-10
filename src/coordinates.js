@@ -7,6 +7,6 @@ export function landmarkToWorld(landmark) {
   return new THREE.Vector3(
     -(landmark.x - 0.5) * aspect * WORLD_SCALE,
     -(landmark.y - 0.5) * WORLD_SCALE,
-    -landmark.z * aspect * WORLD_SCALE,
+    -landmark.z * WORLD_SCALE,
   );
 }

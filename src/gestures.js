@@ -5,6 +5,9 @@ import { LM, FINGERTIP_INDICES } from "./landmarks.js";
 const PINCH_THRESHOLD = 0.05;
 const CLOSED_HAND_THRESHOLD = 1.25; // World-space distance for fingertip-to-palm
 
+/*
+ * This function detects a pinch gesture by measuring the distance between the index fingertip and thumb tip.
+ */
 export function detectPinch(landmarks) {
   const indexTip = landmarks[LM.INDEX_TIP];
   const thumbTip = landmarks[LM.THUMB_TIP];
@@ -16,13 +19,18 @@ export function detectPinch(landmarks) {
   return distance < PINCH_THRESHOLD;
 }
 
-export function detectPinkyPinch(landmarks) {
-  const pinkyTip = landmarks[LM.PINKY_TIP];
+/*
+ * Detects a middle-finger + thumb pinch, used as the delete gesture.
+ * Keeping the index finger extended prevents this from conflicting with
+ * the closed-fist rotation gesture.
+ */
+export function detectMiddlePinch(landmarks) {
+  const middleTip = landmarks[LM.MIDDLE_TIP];
   const thumbTip = landmarks[LM.THUMB_TIP];
   const distance = Math.hypot(
-    pinkyTip.x - thumbTip.x,
-    pinkyTip.y - thumbTip.y,
-    pinkyTip.z - thumbTip.z,
+    middleTip.x - thumbTip.x,
+    middleTip.y - thumbTip.y,
+    middleTip.z - thumbTip.z,
   );
   return distance < PINCH_THRESHOLD;
 }

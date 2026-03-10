@@ -14,6 +14,7 @@ const mesh = new THREE.Mesh(
 scene.add(mesh);
 
 const smoothPos = new THREE.Vector3();
+const coordsLabel = document.getElementById("cursor-coords");
 
 function lerp(a, b, t) {
   return a + (b - a) * t;
@@ -29,6 +30,7 @@ export const cursor = {
     smoothPos.y = lerp(smoothPos.y, targetPos.y, SMOOTHING_FACTOR);
     smoothPos.z = lerp(smoothPos.z, targetPos.z, SMOOTHING_FACTOR);
     mesh.position.copy(smoothPos);
+    coordsLabel.textContent = `x: ${smoothPos.x.toFixed(2)}\ny: ${smoothPos.y.toFixed(2)}\nz: ${smoothPos.z.toFixed(2)}`;
   },
 
   setColor(hex) {

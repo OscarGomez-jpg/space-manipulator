@@ -3,9 +3,8 @@ import { landmarkToWorld } from "./coordinates.js";
 import { LM } from "./landmarks.js";
 import {
   detectPinch,
-  detectPinkyPinch,
+  detectMiddlePinch,
   detectClosedHand,
-  getHandOrientation,
 } from "./gestures.js";
 import { cursor } from "./cursor.js";
 import { model } from "./model.js";
@@ -128,7 +127,7 @@ export function processFrame(landmarks) {
 
   const cursorPos = cursor.position.clone();
   const isPinching = detectPinch(landmarks);
-  const isPinkyPinching = detectPinkyPinch(landmarks);
+  const isPinkyPinching = detectMiddlePinch(landmarks);
   const isClosed = detectClosedHand(landmarks);
   const handPos = landmarkToWorld(landmarks[LM.WRIST]);
 

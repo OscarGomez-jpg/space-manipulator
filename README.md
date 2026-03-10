@@ -43,3 +43,18 @@ models/
 - **Three.js** — 3D rendering
 - **MediaPipe Tasks Vision** — real-time hand landmark detection
 - **Vite** — dev server and bundler
+
+## Structural design
+
+- `model.js` controls the whole state of the points. How to add them, what color
+they will have and their position.
+- `gestures.js` controls what landmarks will be detected by the program.
+- `interactions.js` is where the model gets interacted by the gestures.
+- `cursor.js` controls the green dot that is used to know where the user is placing the points.
+- `landmarks.js` is a config file that has the dots recognized by the model with a user
+friendly name that can be recognized by the programmer.
+- `corrdinates.js` translates the local positions of the model to the positions of the
+mesh in THREE.js.
+- `main.js` has the main loop where each frame is updated and processed.
+- `scene.js` has the globla configuration of the canvas where the system runs.
+- `handTracking.js` has the recognition API configuration from google's MediaPipe.

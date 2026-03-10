@@ -1,6 +1,7 @@
 import { scene, camera, renderer } from "./scene.js";
 import { initHandTracking, detectHands } from "./handTracking.js";
 import { processFrame } from "./interaction.js";
+import { model } from "./model.js";
 
 async function start() {
   await initHandTracking();
@@ -14,6 +15,7 @@ function loop() {
     processFrame(results.landmarks[0]);
   }
 
+  model.updateAllPointLabels();
   renderer.render(scene, camera);
   requestAnimationFrame(loop);
 }
