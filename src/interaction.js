@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import { landmarkToWorld } from "./coordinates.js";
+import { LM } from "./landmarks.js";
 import {
   detectPinch,
   detectPinkyPinch,
@@ -122,14 +123,14 @@ function updateHighlights(cursorPos) {
 }
 
 export function processFrame(landmarks) {
-  const indexWorld = landmarkToWorld(landmarks[8]);
+  const indexWorld = landmarkToWorld(landmarks[LM.INDEX_TIP]);
   cursor.update(indexWorld);
 
   const cursorPos = cursor.position.clone();
   const isPinching = detectPinch(landmarks);
   const isPinkyPinching = detectPinkyPinch(landmarks);
   const isClosed = detectClosedHand(landmarks);
-  const handPos = landmarkToWorld(landmarks[0]);
+  const handPos = landmarkToWorld(landmarks[LM.WRIST]);
 
   // Delete gesture: pinky-thumb pinch near a point
   if (isPinkyPinching && !state.pinkyPinching) {

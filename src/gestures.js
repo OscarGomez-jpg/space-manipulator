@@ -1,13 +1,13 @@
 import * as THREE from "three";
 import { landmarkToWorld } from "./coordinates.js";
+import { LM, FINGERTIP_INDICES } from "./landmarks.js";
 
 const PINCH_THRESHOLD = 0.05;
-const CLOSED_HAND_THRESHOLD = 1.5; // World-space distance for fingertip-to-palm
-const FINGERTIP_INDICES = [4, 8, 12, 16, 20];
+const CLOSED_HAND_THRESHOLD = 1.25; // World-space distance for fingertip-to-palm
 
 export function detectPinch(landmarks) {
-  const indexTip = landmarks[8];
-  const thumbTip = landmarks[4];
+  const indexTip = landmarks[LM.INDEX_TIP];
+  const thumbTip = landmarks[LM.THUMB_TIP];
   const distance = Math.hypot(
     indexTip.x - thumbTip.x,
     indexTip.y - thumbTip.y,
@@ -17,8 +17,8 @@ export function detectPinch(landmarks) {
 }
 
 export function detectPinkyPinch(landmarks) {
-  const pinkyTip = landmarks[20];
-  const thumbTip = landmarks[4];
+  const pinkyTip = landmarks[LM.PINKY_TIP];
+  const thumbTip = landmarks[LM.THUMB_TIP];
   const distance = Math.hypot(
     pinkyTip.x - thumbTip.x,
     pinkyTip.y - thumbTip.y,
@@ -28,7 +28,7 @@ export function detectPinkyPinch(landmarks) {
 }
 
 export function detectClosedHand(landmarks) {
-  const palm = landmarkToWorld(landmarks[0]);
+  const palm = landmarkToWorld(landmarks[LM.WRIST]);
   return FINGERTIP_INDICES.every((tipIdx) => {
     const tip = landmarkToWorld(landmarks[tipIdx]);
     return palm.distanceTo(tip) <= CLOSED_HAND_THRESHOLD;
@@ -37,19 +37,19 @@ export function detectClosedHand(landmarks) {
 
 export function getHandOrientation(landmarks) {
   const wrist = new THREE.Vector3(
-    landmarks[0].x,
-    landmarks[0].y,
-    landmarks[0].z,
+    landmarks[LM.WRIST].x,
+    landmarks[LM.WRIST].y,
+    landmarks[LM.WRIST].z,
   );
   const indexBase = new THREE.Vector3(
-    landmarks[5].x,
-    landmarks[5].y,
-    landmarks[5].z,
+    landmarks[LM.INDEX_MCP].x,
+    landmarks[LM.INDEX_MCP].y,
+    landmarks[LM.INDEX_MCP].z,
   );
   const pinkyBase = new THREE.Vector3(
-    landmarks[17].x,
-    landmarks[17].y,
-    landmarks[17].z,
+    landmarks[LM.PINKY_MCP].x,
+    landmarks[LM.PINKY_MCP].y,
+    landmarks[LM.PINKY_MCP].z,
   );
 
   const v1 = new THREE.Vector3().subVectors(indexBase, wrist);
